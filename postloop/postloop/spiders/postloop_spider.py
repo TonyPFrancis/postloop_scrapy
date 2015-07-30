@@ -8,6 +8,7 @@ class PostloopSpider(Spider):
     name = 'postloop'
     start_urls = ['http://portal.postloop.com/index.php?forums/health-fitness.22/',]
     allowed_domains = ['postloop.com',]
+    BASE_URL = 'http://portal.postloop.com'
 
     def __init__(self, name=None, **kwargs):
         ScrapyFileLogObserver(open("spider.log", 'w'), level=log.INFO).start()
@@ -36,3 +37,5 @@ class PostloopSpider(Spider):
             return
 
         NEXT_PAGE_XPATH = '//div[@class="PageNav"]//a[text()="Next >"]/@href'
+        next_page = sel.xpath(NEXT_PAGE_XPATH).extract()
+        next_page = self.BASE_URL+'/'+next_page[0] if next_page else ''
