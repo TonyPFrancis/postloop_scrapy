@@ -34,3 +34,5 @@ class PostloopSpider(Spider):
                 yield item
         else:
             return
+
+        NEXT_PAGE_XPATH = '//div[@class="PageNav"]//a[text()="Next >"]/@href'
