@@ -2,8 +2,7 @@ __author__ = 'tony'
 from scrapy.spider import Spider
 from scrapy.log import ScrapyFileLogObserver
 from scrapy import log, Selector
-
-
+from postloop.items import PostloopItem
 
 class PostloopSpider(Spider):
     name = 'postloop'
@@ -27,6 +26,11 @@ class PostloopSpider(Spider):
             for item_sel in item_sels:
                 title = item_sel.xpath(TITLE_XPATH).extract()
                 title = title[0].strip() if title else ''
-                user_name =
+                user_name = item_sel.xpath(USER_XPATH).extract()
+                user_name = user_name[0].strip() if user_name else ''
+                item = PostloopItem()
+                item['title'] = title
+                item['user_name'] = user_name
+                yield item
         else:
             return
