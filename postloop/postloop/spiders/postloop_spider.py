@@ -23,9 +23,10 @@ class PostloopSpider(Spider):
         item_sels = sel.xpath(ITEM_SEL_XPATH)
         if item_sels:
             TITLE_XPATH = './/h3[@class="title"]/a/text()'
+            USER_XPATH = './/a[@title="Thread starter"]/text()'
             for item_sel in item_sels:
                 title = item_sel.xpath(TITLE_XPATH).extract()
                 title = title[0].strip() if title else ''
-
+                user_name =
         else:
             return
