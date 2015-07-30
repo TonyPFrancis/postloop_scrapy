@@ -3,6 +3,7 @@ from scrapy.spider import Spider
 from scrapy.log import ScrapyFileLogObserver
 from scrapy import log, Selector
 from postloop.items import PostloopItem
+from scrapy.http import Request
 
 class PostloopSpider(Spider):
     name = 'postloop'
@@ -39,3 +40,5 @@ class PostloopSpider(Spider):
         NEXT_PAGE_XPATH = '//div[@class="PageNav"]//a[text()="Next >"]/@href'
         next_page = sel.xpath(NEXT_PAGE_XPATH).extract()
         next_page = self.BASE_URL+'/'+next_page[0] if next_page else ''
+        if next_page:
+            yield Request(url=next_page, dont_filter=True, callback=self.parse)
