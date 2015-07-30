@@ -24,6 +24,8 @@ class PostloopSpider(Spider):
         if item_sels:
             TITLE_XPATH = './/h3[@class="title"]/a/text()'
             for item_sel in item_sels:
+                title = item_sel.xpath(TITLE_XPATH).extract()
+                title = title[0].strip() if title else ''
 
         else:
             return
