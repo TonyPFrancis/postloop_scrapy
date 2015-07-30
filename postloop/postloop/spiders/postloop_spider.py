@@ -21,3 +21,9 @@ class PostloopSpider(Spider):
         ITEM_SEL_XPATH = '//ol[@class="discussionListItems"]/li'
 
         item_sels = sel.xpath(ITEM_SEL_XPATH)
+        if item_sels:
+            TITLE_XPATH = './/h3[@class="title"]/a/text()'
+            for item_sel in item_sels:
+
+        else:
+            return
