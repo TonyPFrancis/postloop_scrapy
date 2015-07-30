@@ -19,3 +19,5 @@ class PostloopSpider(Spider):
         sel = Selector(response)
 
         ITEM_SEL_XPATH = '//ol[@class="discussionListItems"]/li'
+
+        item_sels = sel.xpath(ITEM_SEL_XPATH)
